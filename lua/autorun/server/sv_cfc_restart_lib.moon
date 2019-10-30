@@ -4,7 +4,7 @@ RestartUrl = string.Replace RestartUrl, "\n", ""
 
 getRestartToken = -> file.Read "cfc/restart/token.txt", "DATA"
 
-restart = (sucess, failure) -> http.Post RestartUrl, { restartToken: getRestartToken! }, success, failure
+restart = (success, failure) -> http.Post RestartUrl, { restartToken: getRestartToken! }, success, failure
 
 generateTimerName = -> math.Round(math.Random! * 1000)
 
