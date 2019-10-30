@@ -22,4 +22,4 @@ class CFCRestartLib
     stopTimer: => timer.Remove @timerName
 
 
-    scheduleRestart: (delay, reason) => createTimer delay
+    scheduleRestart: (delay, reason) => @createTimer delay
