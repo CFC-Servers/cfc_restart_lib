@@ -13,7 +13,7 @@ class CFCRestartLib
         @timerName = nil
         @onSuccess = (result) -> print result
         @onFailure = (result) -> print result
-
+    restart: => restart @onSuccess, @onFailure
     createTimer: (delay) =>
         @timerName = generateTimerName!
 
