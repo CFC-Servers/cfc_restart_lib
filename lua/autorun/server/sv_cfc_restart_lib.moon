@@ -6,7 +6,7 @@ getRestartToken = -> file.Read "cfc/restart/token.txt", "DATA"
 
 restart = (success, failure) -> http.Post RestartUrl, { restartToken: getRestartToken! }, success, failure
 
-generateTimerName = -> math.Round(math.Random! * 1000)
+generateTimerName = -> "restart-countdown-#{math.Round(math.Random! * 1000)}"
 
 class CFCRestartLib
     new: =>
@@ -15,10 +15,9 @@ class CFCRestartLib
         @onFailure = (result) -> print result
 
     createTimer: (delay) =>
-        timerName = generateTimerName!
-        @timerName = timerName
+        @timerName = generateTimerName!
 
-        timer.Create timerName, delay, 1, @restart
+        timer.Create @timerName, delay, 1, @restart
 
     stopTimer: => timer.Destroy @timerName
 
