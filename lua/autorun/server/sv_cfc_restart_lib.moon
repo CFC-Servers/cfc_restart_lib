@@ -21,6 +21,5 @@ class CFCRestartLib
 
     stopTimer: => timer.Remove @timerName
 
-    restart: => restart @onSuccess, @onFailure
 
     scheduleRestart: (delay, reason) => createTimer delay
