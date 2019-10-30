@@ -19,7 +19,7 @@ class CFCRestartLib
 
         timer.Create @timerName, delay, 1, @restart
 
-    stopTimer: => timer.Destroy @timerName
+    stopTimer: => timer.Remove @timerName
 
     restart: => restart @onSuccess, @onFailure
 
