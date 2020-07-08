@@ -19,11 +19,11 @@ class CFCRestartLib
 
     restart: => @performRestart @onSuccess, @onFailure
 
-    generateTimerName: => "restart-countdown-#{math.Round math.Random! * 1000}"
+    generateTimerName: => "restart-countdown-#{math.Round math.random! * 1000}"
 
     createTimer: (delay) =>
         @timerName = @generateTimerName!
-        timer.Create @timerName, delay, 1, @restart
+        timer.Create @timerName, delay, 1, -> @restart!
 
     stopTimer: => timer.Remove @timerName
 
