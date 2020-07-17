@@ -16,12 +16,17 @@ Once you've converted to lua, you can just plop the project into your addons fol
 
 # Usage
 
+## Setup
 First, you need to create two files:
 In `garrysmod/data/cfc/restart/url.txt`, you need to put the full URL of the endpoint that will restart the server.
 
 You'll need to create `garrysmod/data/cfc/restart/token.txt` - the Restart Lib sends along a token with its request that you can use to help verify that the request actually came from your gmod server. If you don't want to use this feature, you can leave the file empty, but the addon expects it to exist so you still need to create it.
 
-Here's a simple usage example:
+CFC Restart Lib is a require-able library, so in your code you'll need to do `require( "cfc_restart_lib" )` before using it.
+
+## Examples
+
+### Simple Restart
 ```lua
 require("cfc_restart_lib")
 
@@ -32,6 +37,33 @@ restarter:restart()
 
 And.. that's it! It'll immediately fire off a request to the restart URL with the contents of `data/cfc/restart/url.txt`.
 
+
+### Scheduled Restart
+```lua
+require( "cfc_restart_lib" )
+
+local restartDelay = 5 -- in seconds
+local restarter = CFCRestartLib()
+
+restart:scheduleRestart( restartDelay )
+```
+In 5 seconds, the Restarter will initiate a restart.
+
+### Cancelling a Scheduled Restart
+```lua
+require( "cfc_restart_lib" )
+
+local restartDelay = 5 -- in seconds
+local restarter = CFCRestartLib()
+
+restart:scheduleRestart( restartDelay )
+
+timer.Simple( restartDelay - 1, function()
+    -- Cancel the scheduled restart
+    restarter:stopTimer()
+end )
+```
+In this example, we start a scheduled restart, but cancel it 1 second before it fires.
 
 # API
 There are two ways you can use restarter;
