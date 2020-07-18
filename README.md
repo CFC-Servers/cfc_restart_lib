@@ -2,7 +2,7 @@
 Library to initiate, schedule, and cancel server restarts
 
 # Overview
-On CFC, we have a backend service that receives authenticated web requests and issues an OS-level game restart. This allows us to fully restart the server from within the GLua environment. We use it for a few things, most notably we have an in-game timer that restarts the server once per day. We also have a ULX command that uses this library ot restart the server.
+On CFC, we have a backend service that receives authenticated web requests and issues an OS-level game restart. This allows us to fully restart the server from within the GLua environment. We use it for a few things, most notably we have an in-game timer that restarts the server once per day. We also have a ULX command that uses this library to restart the server.
 
 There are many possibilities, it's really up to you.
 
