@@ -15,7 +15,7 @@ class CFCRestartLib
     getRestartToken: => Read "cfc/restart/token.txt", "DATA"
 
     performRestart: (success, failure) =>
-        http.Post RestartUrl, { restartToken: @getRestartToken! }, success, failure
+        http.Post RestartUrl, {}, success, failure, { Authorization: @getRestartToken! }
 
     restart: => @performRestart @onSuccess, @onFailure
 
