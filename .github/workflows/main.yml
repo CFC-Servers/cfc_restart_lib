@@ -3,7 +3,7 @@ name: Create Moonscript Release
 on:
   push:
     tags:
-      - 'v*'
+      - '*'
 
 jobs:
   build:
