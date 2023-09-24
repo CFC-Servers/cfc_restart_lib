@@ -1,9 +1,8 @@
 import Read from file
 import Replace from string
 
-RestartUrl = Read "cfc/restart/url.txt", "DATA"
-RestartUrl = Replace RestartUrl, "\r", ""
-RestartUrl = Replace RestartUrl, "\n", ""
+RestartUrl = CreateConVar "cfc_restart_url", "", FCVAR_PROTECTED, "URL of the Restart endpoint"
+RestartToken = CreateConVar "cfc_restart_token", "", FCVAR_PROTECTED, "Token for the Restart endpoint"
 
 export CFCRestartLib
 class CFCRestartLib
@@ -12,14 +11,8 @@ class CFCRestartLib
         @onSuccess = (result) -> print result
         @onFailure = (result) -> print result
 
-    getRestartToken: =>
-        token = Read "cfc/restart/token.txt", "DATA"
-        token = Replace token, "\r", ""
-        token = Replace token, "\n", ""
-        return token
-
     performRestart: (success, failure) =>
-        http.Post RestartUrl, {}, success, failure, { Authorization: @getRestartToken! }
+        http.Post RestartUrl\GetString!, {}, success, failure, { Authorization: RestartToken\GetString! }
 
     restart: => @performRestart @onSuccess, @onFailure
 
